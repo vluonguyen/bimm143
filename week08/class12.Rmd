@@ -1,0 +1,110 @@
+---
+title: "class12"
+author: "Vina Nguyen"
+date: "2023-05-21"
+output: pdf_document
+---
+
+## 1. Bioconductor and DESeq2 setup
+
+Bioconductor packages are installed differently than “regular” R packages from CRAN. To install the core Bioconductor packages, copy and paste the following two lines of code into your R console one at a time.
+
+```{r}
+library(BiocManager)
+library(DESeq2)
+```
+
+## 2. Import countData and colData
+
+```{r}
+counts <- read.csv("airway_scaledcounts.csv", row.names=1)
+metadata <-  read.csv("airway_metadata.csv")
+```
+
+```{r}
+head(counts)
+```
+
+```{r}
+head(metadata)
+```
+
+> Q1. How many genes are in this dataset?
+
+```{r}
+dim(counts)
+```
+There are 38694.
+
+> Q2. How many ‘control’ cell lines do we have?
+
+```{r}
+# counting the number of control cell lines 
+# select vector and identify each colum where the condition is met (in this case the vector is dex in metadata and the contidion is "control")
+metadata$dex == "control"
+which(metadata$dex == "control")
+```
+There are 4 'control' cell lines.
+
+> 3. Toy Differential Gene Expression
+
+Lets perform some exploratory differential gene expression analysis. Note: this analysis is for demonstration only. NEVER do differential expression analysis this way!
+
+```{r}
+control <- metadata[metadata[,"dex"]=="control",]
+control.counts <- counts[ ,control$id]
+control.mean <- rowSums( control.counts )/4 
+head(control.mean)
+```
+
+Alternative way: use dplyr package
+
+```{r}
+library(dplyr)
+control <- metadata %>% filter(dex=="control")
+control.counts <- counts %>% select(control$id) 
+control.mean <- rowSums(control.counts)/4
+head(control.mean)
+```
+
+Prefer dplyr method because the code is easier to read and comprehend. 
+
+> Q3. How would you make the above code in either approach more robust?
+
+Add more samples to have more accurate representation.
+
+> Q4. Follow the same procedure for the treated samples (i.e. calculate the mean per gene across drug treated samples and assign to a labeled vector called treated.mean)
+
+```{r}
+treated <- metadata[metadata[,"dex"]=="treated",]
+treated.mean <- rowSums( counts[ ,treated$id] )/4 
+names(treated.mean) <- counts$ensgene
+head(treated.mean)
+```
+
+We will combine our meancount data for bookkeeping purposes.
+
+```{r}
+meancounts <- data.frame(control.mean, treated.mean)
+```
+
+```{r}
+## control.mean treated.mean 
+##     23005324     22196524
+```
+
+> Q5 (a). Create a scatter plot showing the mean of the treated samples against the mean of the control samples. Your plot should look something like the following.
+
+```{r}
+plot(meancounts[,1],meancounts[,2], xlab="Control", ylab="Treated")
+```
+
+> Q5 (b).You could also use the ggplot2 package to make this figure producing the plot below. What geom_?() function would you use for this plot?
+
+geom_point
+
+> Q6. Try plotting both axes on a log scale. What is the argument to plot() that allows you to do this?
+
+
+
+

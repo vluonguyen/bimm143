@@ -1,0 +1,37 @@
+---
+title: "class11pt1"
+author: "Vina Nguyen"
+date: "2023-05-21"
+output: pdf_document
+---
+
+# Introduction to Genome Informatics Lab
+
+## Section 1: Identify Genetic Variants of Interest
+
+Downloaded CSV file from Ensemble < https://useast.ensembl.org/Homo_sapiens/Variation/Sample?db=core;r=17:39800108-39990109;v=rs8067378;vdb=variation;vf=105535077#373531_tablePanel
+
+Here we read this CSV file.
+
+```{r}
+mxl <- read.csv("373531-SampleGenotypes-Homo_sapiens_Variation_Sample_rs8067378.csv")
+head(mxl)
+```
+
+What proportion of the Mexican Ancestry in Los Angeles sample population (MXL) are homozygous for the asthma associated SNP (G|G)?
+
+```{r}
+table(mxl$Genotype..forward.strand.)
+```
+
+```{r}
+table(mxl$Genotype..forward.strand.) / nrow(mxl) * 100
+```
+
+
+
+
+
+
+
+
