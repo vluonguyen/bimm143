@@ -1,0 +1,69 @@
+---
+title: "class14"
+author: "Vina Nguyen"
+date: "2023-06-01"
+output: html_document
+---
+
+# Introduction to Git and GitHub
+
+In this session we will interface with GitHub from our local computers using RStudio.
+
+We want to use GitHub because it helps make coding collaborative and social while also providing huge benefits to organization, archiving, and being able to find your files easily when you need them.
+
+Git is a program that you install on your computer: it is version control software that tracks changes to your files over time.
+
+Github is a website that is essentially a social media platform for your git-versioned files. GitHub stores all your versioned files as an archive, but also as allows you to interact with other people’s files and has management tools for the social side of software projects. It has many nice features to be able visualize differences between images, rendering & diffing map data files, render text data files, and track changes in text.
+
+## 4. Connecting RStudio to GitHub
+
+To generate a personal access token, use the create_github_token() function from usethis. This will take you to the appropriate page on the GitHub website, where you’ll give your token a name and copy it (don’t lose it because it will never appear again!). To do this, go to RStudio and type
+
+Create a Personal Access Token (PAT) on GitHub
+
+```{r}
+install.packages("usethis")
+library(usethis)
+create_github_token()
+```
+
+Store Personal Access Token to Connect RStudio and GitHub
+
+```{r}
+install.packages("gitcreds")
+library(gitcreds)
+gitcreds_set()
+```
+
+## 5. Create a GitHub repository
+
+Repositories are the main “unit” of GitHub: they are what GitHub tracks. They are essentially project-level folders that will contain everything associated with a project. It’s where we’ll start too.
+
+We create a new repository (called a “repo”) by clicking “New repository.”
+
+## 6. Clone your repository using RStudio
+
+Let’s clone this repo to our local computer using RStudio. Unlike downloading, cloning keeps all the version control and user information bundled with the files.
+
+Copy the repo address: https://github.com/vluonguyen/bimm143.git
+
+## 7. RStudio: New Project
+
+Now go back to RStudio, and click on New Project. There are a few different ways; you could also go to File > New Project…, or click the little green + with the R box in the top left. also in the File menu).
+
+## 9. Sync from RStudio (local) to GitHub (remote)
+Syncing to GitHub.com means 4 steps:
+
+Pull
+
+Stage
+
+Commit
+
+Push
+
+
+
+
+
+

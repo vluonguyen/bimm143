@@ -1,0 +1,27 @@
+---
+title: "mini-project"
+author: "Vina Nguyen A16151678"
+format: html
+editor: visual
+---
+
+## Preparing the Data
+
+First we download and import our data.\
+Use read.csv() function to read the CSV files
+
+```{r}
+read.csv("WisconsinCancer.csv", row.names = 1)
+```
+
+```{r}
+fna.data <- ("WisconsinCancer.csv")
+```
+
+```{r}
+wisc.df <- fna.data
+```
+
+```{r}
+
+```
