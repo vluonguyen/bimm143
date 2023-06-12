@@ -1,0 +1,38 @@
+---
+title: "heatmap"
+author: "Vina Nguyen"
+date: "2023-06-05"
+output: html_document
+---
+
+```{r}
+library(bio3d)
+```
+
+Read the FASTA file and create a sequence object:
+
+```{r}
+fasta_file <- "C:/Users/myeon/OneDrive/Documents/BIMM143/Find_a_gene_project/alignment1.clwstrict"
+sequence <- read.fasta(fasta_file)
+```
+
+Compute identity matrix:
+
+```{r}
+identity_matrix <- seqidentity(sequence)
+```
+
+Create a heatmap using heatmap function:
+
+```{r}
+heatmap(identity_matrix, col = colorRampPalette(c("red", "yellow"))(50), scale = "none", margins = c(5,5), cexCol = 0.6, cexRow = 1)
+```
+
+
+
+
+
+
+
+
+
